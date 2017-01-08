@@ -13,6 +13,7 @@ import spotipy.util
 import pickle
 import os
 import requests
+from pydub import AudioSegment
 
 
 
@@ -36,38 +37,53 @@ def connect():
 
 ###Gestion des données.###
 ###############################################################################
-"""Enregistrer un objet dans un fichier."""
+
 def save_obj(obj, name):
+    """Enregistrer un objet dans un fichier."""
     with open(name + '.pkl', 'wb') as f:
         pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
         
-"""Charger un objet dans un fichier."""
+
 def load_obj(name):
+    """Charger un objet dans un fichier."""
     with open(name + '.pkl', 'rb') as f:
         return pickle.load(f)
         
-"""Enregistrer un mp3 dans un fichier."""       
-def save_mp3(url, filename):
+       
+def save_mp3(url, fileName):
+    """Enregistrer un mp3 dans un fichier."""
     request = requests.get(url, timeout=10, stream=True)
-    with open(filename+'.mp3', 'wb') as fh:
+    with open(fileName, 'wb') as fh:
         for chunk in request.iter_content(1024 * 1024):
             fh.write(chunk)
+
+      
+def save_wav(url, tag, fileName):
+    """Enregistrer un wav dans un fichier (à partir d'un lien vers un mp3).""" 
+    filePath = tag+'/Wav/'+fileName
+    save_mp3(url, filePath+'.mp3')
+    sound = AudioSegment.from_mp3(filePath+'.mp3')
+    sound = sound.set_channels(1)
+    sound.export(filePath+'.wav', format="wav")
+    os.remove(filePath+'.mp3')
 ###############################################################################        
 
 
 ###Actions Spotify.###
 ###############################################################################
-"""Fait une recherche de playlists sur Spotify"""
+
 def search_playlists(search):
+    """Fait une recherche de playlists sur Spotify"""
     if not token:
         connect()
     results = sp.search(q=search, type='playlist')
     return results['playlists']
 
-"""Enregistre infos et mp3 (de 30s) d'une liste de playlists avec une limite 
-de morceaux par playlist et une limite de morceaux au total.
-"""
+
 def save_playlists(playlists, tag, listLimit = 15, totalLimit = 100):
+    """Enregistre infos et mp3 (de 30s) d'une liste de playlists avec une 
+    limite de morceaux par playlist et une limite de morceaux au total.
+    """
     if not token:
         connect()
     #On crée les bons dossiers s'ils n'existent pas
@@ -75,8 +91,8 @@ def save_playlists(playlists, tag, listLimit = 15, totalLimit = 100):
         os.makedirs(tag)
     if not os.path.exists(tag+"/Infos"):
         os.makedirs(tag+"/Infos")
-    if not os.path.exists(tag+"/Mp3"):
-        os.makedirs(tag+"/Mp3")
+    if not os.path.exists(tag+"/Wav"):
+        os.makedirs(tag+"/Wav")
     
     #On ouvre/initialise les infos generales sur le dossier
     fileId = 0
@@ -107,7 +123,7 @@ def save_playlists(playlists, tag, listLimit = 15, totalLimit = 100):
             if music['preview_url'] != None:
                 general['tracks'].append(music)
                 save_obj(music, tag+"/Infos/"+str(fileId))
-                save_mp3(music['preview_url'], tag+"/Mp3/"+str(fileId))
+                save_wav(music['preview_url'], tag, str(fileId))
                 num+=1
                 fileId+=1
     save_obj(general, tag+"/general")
@@ -117,8 +133,5 @@ def save_playlists(playlists, tag, listLimit = 15, totalLimit = 100):
 #Exemple
 search = "energetic"                    
 playlists = search_playlists(search)
-save_playlists(playlists, search)
+save_playlists(playlists, search, 10, 20)
 
-  
-
-        
