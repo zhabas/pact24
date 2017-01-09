@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Vibe Network</string>
     <string name="title_activity_map">Map</string>
-    <string name="title_activity_map2">map2</string>
+
+
     <string name="title_activity_sign_in">Sign in</string>
 
     <!-- Strings related to login -->
@@ -16,4 +17,12 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
 </resources>
