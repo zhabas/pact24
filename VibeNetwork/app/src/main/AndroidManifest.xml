@@ -34,15 +34,16 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBbWvY7Ol0ZIl5eMD8aeNlHrUmghQOoIb4" />
 
-        <activity
-            android:name=".Map"
-            android:label="@string/title_activity_map" />
         <activity android:name=".Suggestions" />
         <activity android:name=".FriendsList" />
         <activity android:name=".Preferences" />
         <activity android:name=".Settings" />
         <activity android:name=".SignIn" />
         <activity android:name=".SignUp" />
+        <activity
+            android:name=".Map"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
