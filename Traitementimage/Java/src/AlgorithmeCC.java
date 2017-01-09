@@ -3,11 +3,13 @@ import java.util.ArrayList;
 
 public class AlgorithmeCC {	
 	
-	private static int[][] firstPhase(ArrayList<ArrayList<Integer>> image){
+	
+	
+	private static int[][] firstPhase(BufferedImage bimage){
 		
 		int[] predecessor = new int[30];
-		int h = image.size() ;
-		int w = image.get(0).size();
+		int h = bimage.getHeight() ;
+		int w = bimage.getWidth();
 		int[][] imagecompo = new  int[h][w] ;
 		imagecompo[0][0]=0;
 		for (int i=0; i<h ; i++){

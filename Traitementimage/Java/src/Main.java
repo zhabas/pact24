@@ -6,25 +6,17 @@ import javax.imageio.ImageIO;
 
 public class Main {
   
-	public static void main(String[] argv) throws Exception {
+	public static void main(String[] argv) {
 
-    int width = 100;
-    int height = 100;
-
-    /**
-     * BufferedImage bimage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-     * bimage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-     */
-   
+		Main.initFromTiffFile();
+		
 	}
 	
-	public final void initFromTiffFile(File inputfile) {
-		
-		BufferedImage image ;
+	public final static void initFromTiffFile() {
 		
 		try {
-			image = ImageIO.read(inputfile);
-			
+			BufferedImage bimage = ImageIO.read(new File("test.tif"));
+			System.out.println(bimage.getRGB(0,0));
 		} catch (IOException e) {
 			System.out.println("Error: " + e);
 		}
