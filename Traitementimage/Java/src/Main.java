@@ -21,17 +21,26 @@ public class Main {
 	public final static void initFromJpg() {
 		
 		File testjpg = new File("Traitementimage/Java/data/test.jpg");
+		int[][] temptab ;
 		
 		try {
 			BufferedImage bimg = ImageIO.read(testjpg);
-			System.out.println(bimg.getHeight());
-			System.out.println(bimg.getWidth());
+			temptab = AlgorithmeCC.firstPhase(bimg) ;
+			AlgorithmeCC.secondPhase(temptab);
+			
 		} catch (IOException e) {
 			System.out.println("Error: " + e);
 		}
 		
 	}
 	
+	public final static void fromArrayToJpg() {
+		
+		File newjpgfile = new File("ImageJpeg.jpg");
+		//ImageIO.write(myBufferedImage, "jpg", newjpgfile);
+	}
+	
+	/**
 	
 	public final static void initFromTiffFile() {
 		
@@ -71,5 +80,5 @@ public class Main {
 	    assertTrue("No tiff decoder", reader.hasNext());
 	}
 	
-
+	*/
 }
