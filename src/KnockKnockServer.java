@@ -20,19 +20,19 @@ public class KnockKnockServer {
                 new InputStreamReader(clientSocket.getInputStream()));
         ) {
          
-            String inputLine, outputLine;
+            String inputLine;
+            int outputLine;
              
             // Initiate conversation with client
-            KnockKnockProtocol kkp = new KnockKnockProtocol();
-            System.out.println(kkp);
-            outputLine = kkp.processInput(null);
+            LoggingProtocol lp = new LoggingProtocol();
+            outputLine = lp.processInput(null);
             out.println(outputLine);
- 
-            while ((inputLine = in.readLine()) != null) {
-                outputLine = kkp.processInput(inputLine);
+            int init = 1 ;
+            inputLine = in.readLine();
+            while (init !=0) 
+            {
+                init = lp.processInput(inputLine);
                 out.println(outputLine);
-                if (outputLine.equals("Bye."))
-                    break;
             }
         } catch (IOException e) {
             System.out.println("Exception caught when trying to listen on port "
