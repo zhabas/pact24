@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class AlgorithmeCC {	
 	
-	static int[] predecessor = new int[1024]; //class variable used by both methods
+	static int[] predecessor = new int[512]; //class variable used by both methods
 	
 	public static int[][] firstPhase(BufferedImage bimg){
 		

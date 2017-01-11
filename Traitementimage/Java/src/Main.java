@@ -20,7 +20,7 @@ public class Main {
 	
 	public final static void initFromJpg() {
 		
-		File testjpg = new File("Traitementimage/Java/data/test.jpg");
+		File testjpg = new File("Traitementimage/Java/data/test2.jpg");
 		int[][] temptab ;
 		
 		try {
