@@ -19,7 +19,7 @@ public class Home extends AppCompatActivity {
         signInButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                Intent signInIntent=new Intent(Home.this,Map.class);
+                Intent signInIntent=new Intent(Home.this,SignIn.class);
                 startActivity(signInIntent);
             }
         });

@@ -3,6 +3,7 @@ package com.vibenetwork.vibenetwork;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -145,7 +146,6 @@ public class SignIn extends AppCompatActivity implements LoaderCallbacks<Cursor>
      */
     private void attemptLogin() {
         if (mAuthTask != null) {
-            return;
         }
 
         // Reset errors.
@@ -191,13 +191,13 @@ public class SignIn extends AppCompatActivity implements LoaderCallbacks<Cursor>
     }
 
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
+        boolean test=email.equals("admin");
+        return test;
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
+        boolean test=password.equals("admin");
+        return test;
     }
 
     /**
@@ -334,6 +334,8 @@ public class SignIn extends AppCompatActivity implements LoaderCallbacks<Cursor>
 
             if (success) {
                 finish();
+                Intent mapIntent=new Intent(SignIn.this,Map.class);
+                startActivity(mapIntent);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
